@@ -283,3 +283,27 @@ module.exports = function ( app ) {
 那么我们在app.js文件中直接引用index.js文件就可以访问这些文件了，如下所示：
 
 require('./routes')(app); //app:express对象。;
+
+中间件传递信息
+这里我们就一步到位，在register的post请求处理中我们使用了express-session模块来保存相关信息，这里我们就使用中间件来传递这些提示信息，中间件内容如下所示：
+
+app.use(function(req, res, next){
+    res.locals.user = req.session.user; //保存用户信息
+    var err = req.session.error;  //保存结果响应信息
+    res.locals.message = '';  // 保存html标签
+    if (err) res.locals.message = '<div class="alert alert-danger" style="margin-bottom: 20px;color:red;">' + err + '</div>';
+    next();
+});
+这里注意中间件的安放位置，还有我们设置了变量message并为其简单添加了样式，这里我们在register视图里就用它来作为操作结果的信息提示，直接添加<%- message %>到视图第一个div内即可。
+
+关于注册我们基本已经准备就绪，开始打开连接数据库并设置用户过期时间(注意执行顺序，应放置在首个中间件位置)，app.js条件内容如下：
+
+mongoose.connect("mongodb://127.0.0.1:27017/test");
+
+app.use(session({
+    secret:'secret',
+    cookie:{
+        maxAge:1000*60*30
+    }
+}));
+到这里，注册功能已经完毕，在用户注册的信息录入中，我们没有进行相关的为空、两次密码的不匹配等等验证等等(可自行添加)，赶紧注册试试吧，本地的话可以通过MongoVUE(可视化客户端)来查看数据是否成功写入数据库。
