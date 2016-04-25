@@ -7,6 +7,8 @@ var multer = require('multer');
 var session = require('express-session');
 var mongoose = require('mongoose');
 
+var mongoose = require('mongoose');
+
 global.dbHelper = require('./common/dbHelper');
 
 app.set('view engine', 'html');
