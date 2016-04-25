@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var session = require('express-session');
+var mongoose = require('mongoose');
 
 global.dbHelper = require('./common/dbHelper');
 
@@ -22,6 +23,12 @@ app.use(session({
     maxAge:1000*60*30
   }
 }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(multer().any(), function(req,res,next){
+  next();
+});
 
 app.use(function(req,res,next){
   res.locals.user = req.session.user;
