@@ -3,7 +3,7 @@
   <head>
   <meta charset='utf-8'>
   <title>用户注册</title>
-  <script src='javascripts/jquery/1.9.0/jquery.js'></script>
+  <script src='/javascripts/jquery/1.9.0/jquery.js'></script>
   </head>
 
   <body>
@@ -35,7 +35,7 @@ function register(){
     data:data,
     success:function(data,status){
       if(status == 'success'){
-        location.href = 'register';
+        location.href = 'login';
       }
     },
     error:function(res,err){
