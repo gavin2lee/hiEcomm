@@ -1,12 +1,11 @@
 'use strict'
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
-var bodyParser = require('body-parser');
-var multer = require('multer');
-var session = require('express-session');
-var mongoose = require('mongoose');
-
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const session = require('express-session');
+const mongoose = require('mongoose');
 
 global.dbHelper = require('./common/dbHelper');
 
@@ -46,7 +45,6 @@ app.use(function(req,res,next){
 require('./routes')(app);
 
 app.get('/', function(req, res){
-  //res.send('Hello Ecomm');
   res.render('register');
 });
 

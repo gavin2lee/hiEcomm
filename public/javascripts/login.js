@@ -1,7 +1,7 @@
 function login(){
   var data = $('form').serialize();
 
-  alert('data:'+data);
+  //alert('data:'+data);
 
   $.ajax({
     url:'/login',

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>购物车</title>
+  <link href="/stylesheets/bootstrap-3.3.5.min.css" rel="stylesheet" media="screen">
+  <link href="/stylesheets/cart.css" rel="stylesheet">
+
+  <script src="/javascripts/jquery/1.9.0/jquery.js" type="text/javascript"></script>
+  <script src="/javascripts/bootstrap-3.3.5.min.js" type="text/javascript"></script>
+  <script src="/javascripts/cart.js"></script>
+
+</head>
+<body>
+  <div style="margin:50px auto;width: 900px;">
+    <div >
+      <div>
+        <div style="float:right;">
+          <a class="btn  btn-xs btn-success" href="home" style="margin-right: 35px;">商品页</a>
+          <a class="btn btn-xs btn-info" href="logout">退 出</a>
+        </div>
+        <h2>购物车</h2>
+        <hr>
+      </div>
+      <div >
+        <div class="cart-heading" >
+          <div style="padding: 10px 0 0 10px">
+            <span style="margin-right: 200px;">
+              <input id="CheckAll"  type="checkbox" > 全选
+            </span>
+            <span style="margin-right: 180px;">商品</span>
+            <span style="margin-right: 210px;">价格</span>
+            <span style="margin-right: 80px;">数量</span>
+            <span style="padding-right: 0px;">操作</span>
+          </div>
+        </div>
+        <div class="cart-body" >
+          <ul >
+            <%for(var i in carts){ if(!carts[i].cId)continue%>
+              <li >
+                <div class="li-checkbox">
+                  <input data-id="<%=carts[i]._id%>" data-index="<%=i%>"  data-price="<%=carts[i].cPrice%>"
+                  name="chkItem"  class="li-checkbox input" type="checkbox" />
+                </div>
+                <div class="li-img">
+                  <a >
+                    <img class="li-img a img" src="/images/<%=carts[i].cImgSrc%>">
+                  </a>
+                </div>
+                <div class="li-content">
+                  <a ><%=carts[i].cName%></a>
+                </div>
+                <div class="li-price" >
+                  <span><%=carts[i].cPrice%></span>
+                </div>
+                <div class="li-quantity">
+                  <a data-type="add" href="javascript:void(0);" class="btn btn-default btn-xs ">+</a>
+                  <input id="Q<%=i%>" style="width: 40px;"  type="text"  value="<%=carts[i].cQuantity%>">
+                  <a data-type='subtr' href="javascript:void(0);" class="btn btn-default btn-xs">-</a>
+                </div>
+                <div class="li-del" >
+                  <a href="/delFromCart/<%=carts[i]._id%>" class="btn btn-primary btn-xs">删除</a>
+                </div>
+              </li>
+              <%}%>
+            </ul>
+          </div>
+          <div style="float: right;height: 35px;width:330px;">
+            总计：<span id="money" style="color: red;font-size: 25px">￥0.00</span>
+            <input type="button" style="width: 130px;float:right;"  class="btn btn-success" onclick=" Clearing();" value="结 算" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

@@ -1,0 +1,16 @@
+.panel-title{
+  font-size: 24px;
+  font-weight: bold;
+}
+.spys{
+  list-style-type: none;
+}
+.spys li{
+  float: left;
+  margin: 10px 10px;
+  width: 180px;
+  height: 230px;
+}
+.spys li div strong{
+  color: red;
+}
